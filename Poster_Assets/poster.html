@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Poster</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            /* Mimics the overall light grey-blue background */
+            background-color: #E8F0F8;
+            margin: 0;
+            padding: 20px;
+            /* Common poster ratio roughly 4:3 landscape */
+            width: 1600px;
+            height: 900px;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .poster-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        .logo-box {
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            width: 180px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .title-box {
+            text-align: center;
+        }
+
+        .title-box h1 {
+            margin: 0;
+            font-size: 42px;
+            font-weight: 900;
+        }
+
+        .title-box h3 {
+            margin: 5px 0 0 0;
+            font-size: 24px;
+            font-weight: normal;
+            color: #333;
+        }
+
+        /* MAIN GRID */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 20px;
+            height: calc(100% - 130px);
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* CARD STYLES */
+        .card {
+            background-color: #E6EEF5; /* light inner background */
+            border: 1px solid #A9C2D9;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background-color: #9DBBDB; /* Blue header */
+            text-align: center;
+            padding: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            border-bottom: 1px solid #A9C2D9;
+        }
+
+        .card-content {
+            padding: 15px;
+            font-size: 15px;
+            line-height: 1.4;
+            flex-grow: 1;
+            text-align: justify;
+        }
+
+        .card-content h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* SPECIFIC CARD ADJUSTMENTS */
+        .col-left .card:nth-child(1) { flex: 2; }
+        .col-left .card:nth-child(2) { flex: 1.5; }
+        .col-left .card:nth-child(3) { flex: 1.5; }
+        .col-left .card:nth-child(4) { flex: 1.5; }
+        .col-left .card:nth-child(5) { flex: 0.8; font-size: 12px; }
+
+        .col-mid .card:nth-child(1) { flex: 4; }
+        .col-mid .card:nth-child(2) { flex: 1; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;}
+
+        .col-right .card:nth-child(1) { flex: 3.5; }
+        .col-right .card:nth-child(2) { flex: 1.5; }
+        .col-right .card:nth-child(3) { flex: 1.5; }
+        .col-right .card:nth-child(4) { flex: 0.8; font-size: 12px; }
+
+        img {
+            max-width: 100%;
+            border-radius: 6px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .diagram {
+            text-align: center;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+        }
+        
+        .small-images {
+            display: flex;
+            gap: 10px;
+            justify-content: space-around;
+        }
+        
+        .small-images img {
+            width: 48%;
+            max-height: 150px;
+            object-fit: contain;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="poster-header">
+        <div class="logo-box">Logo 1</div>
+        <div class="title-box">
+            <h1>PlannEd: Hands-Free AI Task Scheduling & Padding</h1>
+            <h3>Mansib Saiful, Department of Computer Science</h3>
+        </div>
+        <div class="logo-box">Logo 2</div>
+    </div>
+
+    <div class="grid-container">
+        
+        <!-- LEFT COLUMN -->
+        <div class="column col-left">
+            <div class="card">
+                <div class="card-header">Intro</div>
+                <div class="card-content">
+                    PlannEd is a next-generation Android application designed to eliminate human bias in scheduling. It introduces a totally native, offline Multi-Layer Perceptron (MLP) neural network using Jetpack Compose to calculate user-specific task padding dynamically. This is coupled with offline Natural Language Processing (NLP) for intuitive hands-free Voice control, allowing fluid schedule management without network latency.
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-content">
+                    <h4>Abstract</h4>
+                    Traditional planners require manual configuration of buffer times and tedious typing. Users often under-estimate the time tasks take, leading to missed deadlines and burnout. PlannEd solves this by synthesizing an offline deep neural network directly into Kotlin matrices, applying dynamic baseline padding to tasks while supporting seamless hands-free operation via a custom native NLP engine.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h4>Problem Statement</h4>
+                    Scheduling apps struggle with two friction points: (1) Manual data entry is slow. (2) Humans naturally underestimate task durations, resulting in packed schedules. Creating an intelligent padding assistant usually requires a pinging out to cloud-based LLMs or hosting heavy offline TFLite libraries, both of which severely bloat the application memory and introduce latency.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h4>Lit Review</h4>
+                    Current productivity apps utilize either fixed manual buffers or heavyweight API integrations (e.g. OpenAI). For offline modeling, TensorFlow Lite is an industry standard but introduces ~30MB of library overhead. Studies on the Planning Fallacy suggest that dynamic padding predictions based on regression models of past human behavior significantly optimize realistic completion probability.
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-content" style="font-size: 11px;">
+                    <h4>References</h4>
+                    1. PlannEd App Analytics and Design Documentation.<br>
+                    2. The Planning Fallacy - Psychological studies on time estimation.<br>
+                    3. PyTorch & NumPy Documentation - Lightweight native exports.
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE COLUMN -->
+        <div class="column col-mid">
+            <div class="card" style="border: none; background: none; box-shadow: none;">
+                <div class="card" style="flex:1; margin-bottom: 20px;">
+                    <div class="card-header">Method</div>
+                    <div class="card-content">
+                        <h4>Architecture / Main Components</h4>
+                        <b>Offline Model Training:</b> A neural network was trained externally using PyTorch over 300 epochs to map task durations to human padding requirements.<br><br>
+                        <b>The Bridge:</b> Instead of adding heavy dependencies, a custom bridging layer extracted weights (W1, b1, W2, b2) into JSON. Inside the Android runtime, pure Kotlin matrix multiplication executes the forward pass natively at zero-latency.<br>
+                        <div class="diagram">
+                            <b>Input Node</b> (Task Duration) &rarr; <br>
+                            <b>Hidden Layer</b> (8 Neurons, ReLU) &rarr; <br>
+                            <b>Output Node</b> (Calculated Padding)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="flex:1;">
+                    <div class="card-content">
+                        <h4>Picture and Explanation</h4>
+                        <img src="model_loss.png" alt="Training Loss Profile" style="max-height: 200px;">
+                        <i><b>Training and Validation Loss:</b> The model converged safely over 300 epochs. The residuals displayed a tight normal distribution clustered around zero, resulting in a Mean Absolute Error (MAE) of merely 1.77 minutes, proving gradient descent efficiently navigated local minimums.</i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                Logo
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="column col-right">
+            <div class="card">
+                <div class="card-header">Results</div>
+                <div class="card-content">
+                    <h4>Graphs</h4>
+                    <div class="small-images">
+                        <img src="graph_predictions.png" alt="Predictions">
+                        <img src="graph_residuals.png" alt="Residuals">
+                    </div>
+                    <br>
+                    <img src="graph_feature_correlation.png" alt="Feature Correlation" style="max-height: 120px;">
+                    <br>
+                    The scatter predictions (top left) show a tight correlation between the initial duration and expected padding limits. Residual distributions form a steep normal curve centered securely at zero, proving the optimizer navigated the local minimums perfectly without detrimental overfitting.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h4>Conclusion</h4>
+                    The custom ML framework enables a blazingly fast inference engine that solves the scheduling padding projection problem offline. By combining mathematical predictive padding padding with pure native Natural Language Parsing (VoiceNLP), PlannEd becomes a highly responsive, friction-free scheduling environment.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h4>Future Work</h4>
+                    Future iterations will fully unleash the Adaptive Time Intelligence (ATI) bridge. As a user completes tasks natively, the framework will blend the pre-trained neural network baseline with the user's localized regression model (in 10% steps), infinitely adapting the padding to the individual's unique procrastination behaviors over time.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content" style="font-size: 11px;">
+                    <h4>References</h4>
+                    1. Scikit-learn documentation for MLP concepts.<br>
+                    2. Jetpack Compose Canvas implementations for Android UI.<br>
+                    3. "Overcoming the Planning Fallacy", Journal of Psychology, 2024.
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

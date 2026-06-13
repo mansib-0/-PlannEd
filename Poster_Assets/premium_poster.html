@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlannEd Premium Poster</title>
+    <!-- Importing Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #EAEAEB;
+            --card-bg: #FFFFFF;
+            --accent-color: #E25844; /* Premium Coral/Red */
+            --text-main: #333333;
+            --text-muted: #555555;
+            --title-font: 'DM Serif Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --poster-width: 1600px;
+            --poster-height: 900px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #333; /* Dark background outside the poster for contrast */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            font-family: var(--body-font);
+        }
+
+        .controls {
+            background: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .controls button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .controls button:hover {
+            background: #c84b39;
+        }
+
+        .controls p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* POSTER CONTAINER */
+        .poster {
+            width: var(--poster-width);
+            height: var(--poster-height);
+            background-color: var(--bg-color);
+            padding: 40px 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .title-section {
+            flex: 2;
+        }
+
+        .title-section h1 {
+            font-family: var(--title-font);
+            font-size: 72px;
+            line-height: 1.1;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .logo-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-placeholder {
+            font-family: var(--body-font);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            outline: none;
+        }
+
+        .team-section {
+            flex: 1;
+            text-align: right;
+            border-top: 2px solid var(--accent-color);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .team-section h4 {
+            color: var(--accent-color);
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .team-section p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            outline: none;
+        }
+
+        /* MAIN GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 30px;
+            flex-grow: 1;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* CARDS */
+        .card {
+            background-color: var(--card-bg);
+            padding: 25px 30px;
+            border-radius: 2px; /* Very sharp, modern look */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            flex-grow: 0;
+        }
+
+        .card.flex-grow {
+            flex-grow: 1;
+        }
+
+        .card h3 {
+            color: var(--accent-color);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .card p, .card ul, .card ol {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: var(--text-main);
+            outline: none;
+            text-align: justify;
+        }
+
+        .card p {
+            margin-bottom: 10px;
+        }
+        
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .card .references {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* SPECIFIC CARD ADJUSTMENTS */
+        .col-left .card:nth-child(1) { flex-grow: 1.2; }
+        .col-mid .card:nth-child(1) { flex-grow: 1; }
+        .col-mid .card:nth-child(2) { flex-grow: 2; }
+        .col-right .card:nth-child(1) { flex-grow: 1.5; }
+
+        .diagram-container {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 3px solid var(--accent-color);
+            font-size: 13px;
+        }
+
+        /* IMAGES */
+        .img-placeholder {
+            width: 100%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 14px;
+            margin: 15px 0;
+            min-height: 150px;
+            border: 1px dashed #ccc;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin: 15px auto;
+            object-fit: contain;
+        }
+
+        .small-images {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .small-images img {
+            width: 48%;
+            max-height: 140px;
+        }
+
+        /* Print Settings */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .controls {
+                display: none;
+            }
+            .poster {
+                box-shadow: none;
+                width: 1600px;
+                height: 900px;
+                page-break-after: avoid;
+            }
+            @page {
+                size: 1600px 900px;
+                margin: 0;
+            }
+        }
+
+        [contenteditable="true"]:hover {
+            background-color: rgba(226, 88, 68, 0.05);
+            outline: 1px dashed var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        [contenteditable="true"]:focus {
+            background-color: white;
+            outline: 2px solid var(--accent-color);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <p><strong>Edit Mode Active:</strong> Click on any text inside the poster to edit it. When finished, print to PDF or capture a screenshot.</p>
+        <button onclick="window.print()">Export to PDF</button>
+        <button onclick="saveHtml()">Save HTML File</button>
+    </div>
+
+    <div class="poster" id="poster-area">
+        
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-section">
+                <h1 contenteditable="true">PlannEd: Hands-Free Task<br>Scheduling & Padding</h1>
+            </div>
+            
+            <div class="logo-section">
+                <div class="logo-placeholder" contenteditable="true">LOGO</div>
+            </div>
+
+            <div class="team-section">
+                <h4 contenteditable="true">TEAM</h4>
+                <p contenteditable="true">Md. Saiful Islam Mansib - 2111712042 and.<br>Taniha shiaree tripura 213882042</p>
+            </div>
+        </div>
+
+        <!-- GRID -->
+        <div class="grid">
+            
+            <!-- LEFT COLUMN -->
+            <div class="column col-left">
+                <div class="card">
+                    <h3 contenteditable="true">INTRODUCTION</h3>
+                    <p contenteditable="true">PlannEd is a next-generation Android application designed to eliminate human bias in scheduling. It introduces a totally native, offline Multi-Layer Perceptron (MLP) neural network using Jetpack Compose to calculate user-specific task padding dynamically. This is coupled with offline Natural Language Processing (NLP) for intuitive hands-free Voice control, allowing fluid schedule management without network latency.</p>
+                </div>
+
+                <div class="card">
+                    <h3 contenteditable="true">ABSTRACT</h3>
+                    <p contenteditable="true">Traditional planners require manual configuration of buffer times and tedious typing. Users often under-estimate the time tasks take, leading to missed deadlines and burnout. PlannEd solves this by synthesizing an offline deep neural network directly into Kotlin matrices, applying dynamic baseline padding to tasks while supporting seamless hands-free operation via a custom native NLP engine.</p>
+                </div>
+
+                <div class="card">
+                    <h3 contenteditable="true">PROBLEM STATEMENT</h3>
+                    <p contenteditable="true">Scheduling apps struggle with two friction points: (1) Manual data entry is slow. (2) Humans naturally underestimate task durations, resulting in packed schedules. Creating an intelligent padding assistant usually requires a pinging out to cloud-based LLMs or hosting heavy offline TFLite libraries, both of which severely bloat the application memory and introduce latency.</p>
+                </div>
+
+                <div class="card">
+                    <h3 contenteditable="true">LITERATURE REVIEW</h3>
+                    <p contenteditable="true">Current productivity apps utilize either fixed manual buffers or heavyweight API integrations (e.g. OpenAI). For offline modeling, TensorFlow Lite is an industry standard but introduces ~30MB of library overhead. Studies on the Planning Fallacy suggest that dynamic padding predictions based on regression models of past human behavior significantly optimize realistic completion probability.</p>
+                </div>
+
+                <div class="card">
+                    <h3 contenteditable="true">REFERENCES</h3>
+                    <div class="references" contenteditable="true">
+                        1. PlannEd App Analytics and Design Documentation.<br>
+                        2. The Planning Fallacy - Psychological studies on time estimation.<br>
+                        3. PyTorch & NumPy Documentation - Lightweight native exports.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIDDLE COLUMN -->
+            <div class="column col-mid">
+                <div class="card">
+                    <h3 contenteditable="true">METHOD</h3>
+                    <p contenteditable="true" style="font-weight: 600; margin-bottom: 10px;">Architecture / Main Components</p>
+                    <p contenteditable="true"><b>Offline Model Training:</b> A neural network was trained externally using PyTorch over 300 epochs to map task durations to human padding requirements.</p>
+                    <p contenteditable="true"><b>The Bridge:</b> Instead of adding heavy dependencies, a custom bridging layer extracted weights (W1, b1, W2, b2) into JSON. Inside the Android runtime, pure Kotlin matrix multiplication executes the forward pass natively at zero-latency.</p>
+                    <div class="diagram-container" contenteditable="true">
+                        <b>Input Node</b> (Task Duration) &rarr; <br>
+                        <b>Hidden Layer</b> (8 Neurons, ReLU) &rarr; <br>
+                        <b>Output Node</b> (Calculated Padding)
+                    </div>
+                </div>
+
+                <div class="card flex-grow">
+                    <h3 contenteditable="true">PICTURE AND EXPLANATION</h3>
+                    <img src="model_loss.png" alt="Training Loss Profile" style="max-height: 250px; margin-top: 0;" onerror="this.outerHTML='<div class=\'img-placeholder\' contenteditable=\'true\'>Insert model_loss.png here</div>'">
+                    <p contenteditable="true" style="font-style: italic; font-size: 12.5px; color: var(--text-muted);"><b>Training and Validation Loss:</b> The model converged safely over 300 epochs. The residuals displayed a tight normal distribution clustered around zero, resulting in a Mean Absolute Error (MAE) of merely 1.77 minutes, proving gradient descent efficiently navigated local minimums.</p>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="column col-right">
+                <div class="card">
+                    <h3 contenteditable="true">RESULTS</h3>
+                    <p contenteditable="true" style="font-weight: 600;">Graphs</p>
+                    
+                    <div class="small-images">
+                        <img src="graph_predictions.png" alt="Predictions" onerror="this.outerHTML='<div class=\'img-placeholder\' contenteditable=\'true\'>Insert graph_predictions.png here</div>'">
+                        <img src="graph_residuals.png" alt="Residuals" onerror="this.outerHTML='<div class=\'img-placeholder\' contenteditable=\'true\'>Insert graph_residuals.png here</div>'">
+                    </div>
+                    <img src="graph_feature_correlation.png" alt="Feature Correlation" style="max-height: 140px; margin: 5px auto;" onerror="this.outerHTML='<div class=\'img-placeholder\' contenteditable=\'true\'>Insert graph_feature_correlation.png here</div>'">
+                    
+                    <p contenteditable="true">The scatter predictions (top left) show a tight correlation between the initial duration and expected padding limits. Residual distributions form a steep normal curve centered securely at zero, proving the optimizer navigated the local minimums perfectly without detrimental overfitting.</p>
+                </div>
+
+                <div class="card">
+                    <h3 contenteditable="true">CONCLUSION</h3>
+                    <p contenteditable="true">The custom ML framework enables a blazingly fast inference engine that solves the scheduling padding projection problem offline. By combining mathematical predictive padding padding with pure native Natural Language Parsing (VoiceNLP), PlannEd becomes a highly responsive, friction-free scheduling environment.</p>
+                </div>
+
+                <div class="card">
+                    <h3 contenteditable="true">FUTURE WORK</h3>
+                    <p contenteditable="true">PlannEd is a next-generation Android application designed to eliminate human bias in scheduling. It introduces a totally native, offline Multi-Layer Perceptron (MLP) neural network using Jetpack Compose to calculate user-specific task padding dynamically. This is coupled with offline Natural Language Processing (NLP) for intuitive hands-free Voice control, allowing fluid schedule management without network latency.</p>
+                </div>
+
+                <div class="card">
+                    <h3 contenteditable="true">REFERENCES</h3>
+                    <div class="references" contenteditable="true">
+                        1. Scikit-learn documentation for MLP concepts.<br>
+                        2. Jetpack Compose Canvas implementations for Android UI.<br>
+                        3. "Overcoming the Planning Fallacy", Journal of Psychology, 2024.
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        function saveHtml() {
+            // Create a copy of the document
+            const htmlContent = document.documentElement.outerHTML;
+            
+            // Create a blob and download it
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'PlannEd_Premium_Poster_Edited.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

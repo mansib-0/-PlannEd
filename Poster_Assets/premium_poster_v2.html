@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable A0 Premium Poster (Vertical)</title>
+    <!-- Using a very clean, professional font family similar to the attached poster -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --accent-color: #EF7A21; /* RIT Orange from the example */
+            --text-color: #222222;
+            --heading-size: 52pt; /* Spec: 48-60pt */
+            --content-size: 26pt; /* Spec: 24-32pt */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #444; /* Dark outer background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Open Sans', Arial, sans-serif;
+            padding: 40px;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            text-align: center;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .controls p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .controls button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: 0.2s;
+        }
+        
+        .controls button:hover {
+            background: #d86915;
+        }
+
+        /* 
+         * POSTER DIMENSIONS: A0 Portrait 
+         * Width: 84.1cm, Height: 118.9cm
+         */
+        .poster {
+            width: 84.1cm;
+            height: 118.9cm;
+            background: white;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* HEADER SECTION */
+        .header-top {
+            display: flex;
+            padding: 3cm 4cm 1.5cm 4cm;
+            align-items: center;
+        }
+
+        .logo-area {
+            flex: 0 0 22%;
+            border-bottom: 8px solid #222;
+            padding-bottom: 0.8cm;
+            text-align: center;
+        }
+
+        .logo-area h1 {
+            font-size: 100pt;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .logo-area p {
+            font-size: 26pt;
+            margin-top: 0.5cm;
+            font-weight: 600;
+        }
+
+        .title-area {
+            flex: 1;
+            padding-left: 4cm;
+        }
+
+        .title-area .main-title {
+            color: var(--accent-color);
+            font-size: 80pt;
+            font-weight: 800;
+            margin: 0 0 0.8cm 0;
+            line-height: 1.1;
+        }
+
+        .title-area .subtitle {
+            font-size: 38pt;
+            color: var(--accent-color);
+            margin: 0 0 0.3cm 0;
+            font-weight: 600;
+        }
+
+        /* ORANGE BANNER */
+        .orange-banner {
+            background-color: var(--accent-color);
+            color: white;
+            text-align: center;
+            font-size: 65pt;
+            font-weight: 800;
+            padding: 1.2cm 0;
+            margin-bottom: 3cm;
+        }
+
+        /* GRID LAYOUT - 3 Columns */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3.5cm;
+            padding: 0 4cm;
+            flex: 1;
+        }
+
+        /* TEXT AND CONTENT */
+        .section {
+            margin-bottom: 2.5cm;
+        }
+
+        .section-heading {
+            font-size: var(--heading-size);
+            color: var(--text-color);
+            border-bottom: 6px solid var(--accent-color);
+            display: inline-block;
+            margin-bottom: 1cm;
+            font-weight: 700;
+            padding-bottom: 0.2cm;
+        }
+
+        .sub-heading {
+            font-size: 40pt;
+            color: var(--accent-color);
+            margin-bottom: 0.8cm;
+            font-weight: 700;
+        }
+
+        p, ul, ol, div.references {
+            font-size: var(--content-size);
+            line-height: 1.2; /* Spec: Single spaced */
+            color: var(--text-color);
+            margin-bottom: 1cm;
+            text-align: justify;
+        }
+        
+        .references {
+            font-size: 20pt;
+            line-height: 1.4;
+        }
+
+        /* IMAGES & GRAPHS 
+         * Spec: Graphs/Photos no smaller than 12cm x 18cm 
+         */
+        .image-container {
+            margin: 1.5cm 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            /* Minimum dimension enforcement */
+            min-width: 18cm;
+            min-height: 12cm;
+            object-fit: contain;
+            border: 2px solid #eee;
+            background: #fafafa;
+        }
+
+        .image-caption {
+            font-size: 22pt;
+            font-style: italic;
+            color: #555;
+            margin-top: 0.8cm;
+            text-align: left;
+        }
+        
+        .placeholder-img {
+            width: 100%;
+            min-height: 15cm;
+            background: #ececec;
+            border: 3px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30pt;
+            color: #999;
+        }
+
+        /* PRINT CONFIGURATION */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .controls {
+                display: none;
+            }
+            .poster {
+                box-shadow: none;
+                margin: 0;
+            }
+            @page {
+                size: A0 portrait;
+                margin: 0;
+            }
+        }
+
+        [contenteditable="true"]:hover {
+            outline: 3px dashed rgba(239, 122, 33, 0.5);
+            background: rgba(0,0,0,0.02);
+        }
+        
+        [contenteditable="true"]:focus {
+            outline: 4px solid var(--accent-color);
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <p><strong>A0 Poster Edit Mode</strong> - Specifications Applied (A0, 48-60pt headers, 24-32pt text, 12x18cm minimum images).<br>Click any text to edit directly.</p>
+        <button onclick="window.print()">Print / Export to PDF</button>
+        <button onclick="saveHtml()">Save Edited HTML</button>
+    </div>
+
+    <div class="poster" id="poster">
+        
+        <!-- HEADER -->
+        <div class="header-top">
+            <div class="logo-area">
+                <h1 contenteditable="true"><i class="fa-solid fa-robot" style="color: var(--accent-color);"></i> P·E</h1>
+                <p contenteditable="true">Computer Science</p>
+            </div>
+            
+            <div class="title-area">
+                <h1 class="main-title" contenteditable="true">PlannEd: Hands-Free Task Scheduling & Padding</h1>
+                <h2 class="subtitle" contenteditable="true"><i class="fa-solid fa-users" style="margin-right: 15px;"></i>Researchers: Md. Saiful Islam Mansib & Taniha shiaree tripura</h2>
+                <h2 class="subtitle" contenteditable="true"><i class="fa-solid fa-id-card" style="margin-right: 15px;"></i>IDs: 2111712042 & 213882042</h2>
+            </div>
+        </div>
+
+        <div class="orange-banner" contenteditable="true">
+            <i class="fa-solid fa-microchip" style="margin-right: 30px;"></i> AI-Driven Mobile Application & Machine Learning <i class="fa-solid fa-mobile-screen" style="margin-left: 30px;"></i>
+        </div>
+
+        <!-- MAIN 3-COLUMN GRID -->
+        <div class="grid">
+            
+            <!-- COLUMN 1 -->
+            <div class="col">
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-door-open" style="margin-right: 15px;"></i>Introduction</div>
+                    <p contenteditable="true">PlannEd is a next-generation Android application designed to eliminate human bias in scheduling. It introduces a totally native, offline Multi-Layer Perceptron (MLP) neural network using Jetpack Compose to calculate user-specific task padding dynamically. This is coupled with offline Natural Language Processing (NLP) for intuitive hands-free Voice control, allowing fluid schedule management without network latency.</p>
+                </div>
+
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-file-lines" style="margin-right: 15px;"></i>Abstract</div>
+                    <p contenteditable="true">Traditional planners require manual configuration of buffer times and tedious typing. Users often under-estimate the time tasks take, leading to missed deadlines and burnout. PlannEd solves this by synthesizing an offline deep neural network directly into Kotlin matrices, applying dynamic baseline padding to tasks while supporting seamless hands-free operation via a custom native NLP engine.</p>
+                </div>
+
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-circle-exclamation" style="margin-right: 15px;"></i>Problem Statement</div>
+                    <p contenteditable="true">Scheduling apps struggle with two friction points: (1) Manual data entry is slow. (2) Humans naturally underestimate task durations, resulting in packed schedules. Creating an intelligent padding assistant usually requires a pinging out to cloud-based LLMs or hosting heavy offline TFLite libraries, both of which severely bloat the application memory and introduce latency.</p>
+                </div>
+            </div>
+
+            <!-- COLUMN 2 -->
+            <div class="col">
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-magnifying-glass" style="margin-right: 15px;"></i>Literature Review</div>
+                    <p contenteditable="true">Current productivity apps utilize either fixed manual buffers or heavyweight API integrations (e.g. OpenAI). For offline modeling, TensorFlow Lite is an industry standard but introduces ~30MB of library overhead. Studies on the Planning Fallacy suggest that dynamic padding predictions based on regression models of past human behavior significantly optimize realistic completion probability.</p>
+                </div>
+
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-gears" style="margin-right: 15px;"></i>Methodology</div>
+                    <div class="sub-heading" contenteditable="true"><i class="fa-solid fa-network-wired" style="margin-right: 15px;"></i>Architecture Components</div>
+                    <p contenteditable="true"><b>Offline Model Training:</b> A neural network was trained externally using PyTorch over 300 epochs to map task durations to human padding requirements.</p>
+                    <p contenteditable="true"><b>The Bridge:</b> Instead of adding heavy dependencies, a custom bridging layer extracted weights (W1, b1, W2, b2) into JSON. Inside the Android runtime, pure Kotlin matrix multiplication executes the forward pass natively at zero-latency.</p>
+                </div>
+
+                <div class="section">
+                    <div class="sub-heading" contenteditable="true"><i class="fa-solid fa-chart-area" style="margin-right: 15px;"></i>Training & Validation</div>
+                    <div class="image-container">
+                        <img src="model_loss.png" alt="Training Loss Profile" onerror="this.outerHTML='<div class=\'placeholder-img\' contenteditable=\'true\'>[Insert model_loss.png (Min 12x18cm)]</div>'">
+                    </div>
+                    <p class="image-caption" contenteditable="true"><i class="fa-solid fa-camera" style="margin-right: 10px;"></i>The model converged safely over 300 epochs. The residuals displayed a tight normal distribution clustered around zero, resulting in a Mean Absolute Error (MAE) of merely 1.77 minutes, proving gradient descent efficiently navigated local minimums.</p>
+                </div>
+            </div>
+
+            <!-- COLUMN 3 -->
+            <div class="col">
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-chart-pie" style="margin-right: 15px;"></i>Results & Graphs</div>
+                    <p contenteditable="true">The scatter predictions show a tight correlation between the initial duration and expected padding limits. Residual distributions form a steep normal curve centered securely at zero, proving the optimizer navigated the local minimums perfectly without detrimental overfitting.</p>
+                    
+                    <div class="image-container">
+                        <img src="graph_predictions.png" alt="Predictions" onerror="this.outerHTML='<div class=\'placeholder-img\' contenteditable=\'true\'>[Insert graph_predictions.png]</div>'">
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="graph_residuals.png" alt="Residuals" onerror="this.outerHTML='<div class=\'placeholder-img\' contenteditable=\'true\'>[Insert graph_residuals.png]</div>'">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-lightbulb" style="margin-right: 15px;"></i>Conclusion</div>
+                    <p contenteditable="true">The custom ML framework enables a blazingly fast inference engine that solves the scheduling padding projection problem offline. By combining mathematical predictive padding with pure native Natural Language Parsing (VoiceNLP), PlannEd becomes a highly responsive, friction-free scheduling environment.</p>
+                </div>
+
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-rocket" style="margin-right: 15px;"></i>Future Work</div>
+                    <p contenteditable="true">Future iterations will fully unleash the Adaptive Time Intelligence (ATI) bridge. As a user completes tasks natively, the framework will blend the pre-trained neural network baseline with the user's localized regression model (in 10% steps), infinitely adapting the padding to the individual's unique procrastination behaviors over time.</p>
+                </div>
+
+                <div class="section">
+                    <div class="section-heading" contenteditable="true"><i class="fa-solid fa-link" style="margin-right: 15px;"></i>References</div>
+                    <div class="references" contenteditable="true">
+                        <i class="fa-solid fa-bookmark" style="margin-right: 10px; color: var(--accent-color);"></i> 1. PlannEd App Analytics and Design Documentation.<br><br>
+                        <i class="fa-solid fa-bookmark" style="margin-right: 10px; color: var(--accent-color);"></i> 2. The Planning Fallacy - Psychological studies on time estimation.<br><br>
+                        <i class="fa-solid fa-bookmark" style="margin-right: 10px; color: var(--accent-color);"></i> 3. PyTorch & NumPy Documentation - Lightweight native exports.<br><br>
+                        <i class="fa-solid fa-bookmark" style="margin-right: 10px; color: var(--accent-color);"></i> 4. Scikit-learn documentation for MLP concepts.
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        function saveHtml() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'PlannEd_A0_Premium_Poster.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
